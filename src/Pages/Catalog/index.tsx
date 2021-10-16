@@ -1,5 +1,13 @@
+import Header from "../../Components/Header";
+
+import "./styles.css";
+
 function Catalog(){
-    return <h1>Teste</h1>;
+    return (
+        <div id="catalog">
+            <Header/>
+        </div>
+    );
 }
 
 export default Catalog;
