@@ -1,5 +1,67 @@
-#catalog{
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(248, 245, 245);
+#catalog ul{
+    max-width: 1100px;
+    margin: 10px auto;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#catalog ul li{
+    background-color: #FFF;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #EEE;
+    border-radius: 7px;
+}
+
+#catalog ul li img{
+    max-width: 250px;
+}
+
+#catalog ul li .description{
+    margin: 10px 0;
+}
+
+#catalog ul li .description strong{
+    color: rgb(95, 92, 92);
+}
+
+#catalog ul li .description p{
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 25px;
+}
+
+#catalog ul li .addbutton{
+    display: flex;
+    align-items: center;
+    background-color: #f30240;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    overflow: hidden;
+    color: #FFF;
+}
+
+#catalog ul li .addbutton:hover{
+    opacity: 0.8;
+}
+
+#catalog ul li .addbutton strong{
+    margin: 0 auto;
+    font-size: 15px;
+}
+
+#catalog ul li .addbutton .quantinfo{
+    display: flex;
+    align-items: center;
+    background-color: #dd0037;
+    padding: 12px;
+}
+
+#catalog ul li .addbutton .quantinfo p{
+    margin-left: 5px;
 }
