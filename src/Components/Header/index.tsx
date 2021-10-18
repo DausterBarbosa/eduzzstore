@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 import {BsCart2} from "react-icons/bs";
 
 import Logo from "../../Assets/Images/logo.svg";
@@ -8,15 +10,17 @@ function Header(){
     return (
         <header id="header">
             <div className="container">
-                <img src={Logo} alt="Logo" />
+                <Link to="/">
+                    <img src={Logo} alt="Logo" />
+                </Link>
 
-                <div className="cartButton">
+                <Link className="cartButton" to="/cart">
                     <div className="sidePanel">
                         <strong>Meu carrinho</strong>
                         <p>0 item(s)</p>
                     </div>
-                    <BsCart2 size={25}/>
-                </div>
+                    <BsCart2 size={25} color="black"/>
+                </Link>
             </div>
         </header>
     );

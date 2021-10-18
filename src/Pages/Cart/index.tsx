@@ -1,15 +1,11 @@
 import {MdDelete} from "react-icons/md";
 import {IoMdRemoveCircleOutline, IoMdAddCircleOutline} from "react-icons/io";
 
-import Header from "../../Components/Header";
-
 import "./styles.css";
 
 function Cart(){
     return (
         <div id="cart">
-            <Header/>
-
             <div className="cartpanel">
                 <table>
                     <tr>

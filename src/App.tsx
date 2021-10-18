@@ -1,9 +1,9 @@
 import "./Assets/Styles/global.css";
 
-import Cart from "./Pages/Cart";
+import Routes from "./routes";
 
 function App() {
-  return <Cart/>;
+  return <Routes/>;
 }
 
 export default App;
