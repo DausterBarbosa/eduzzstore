@@ -1,6 +1,10 @@
 #header{
-    background-color: #FFF;
+    background-color: #fff154;
     border-bottom: 1px solid #EEE;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 #header .container{
@@ -34,7 +38,7 @@
 
 #header .cartButton .sidePanel strong{
     font-size: 16px;
-    color: black;
+    color: #333333;
 }
 #header .cartButton .sidePanel p{
     font-size: 15px;

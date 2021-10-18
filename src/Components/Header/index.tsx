@@ -19,7 +19,7 @@ function Header(){
                         <strong>Meu carrinho</strong>
                         <p>0 item(s)</p>
                     </div>
-                    <BsCart2 size={25} color="black"/>
+                    <BsCart2 size={25} color="#333333"/>
                 </Link>
             </div>
         </header>
