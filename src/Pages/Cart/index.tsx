@@ -20,7 +20,7 @@ function Cart(){
                             <strong>PRODUTO</strong>
                         </td>
                         <td>
-                            <strong>QNT</strong>
+                            <strong>QUANTIDADE</strong>
                         </td>
                         <td>
                             <strong>SUBTOTAL</strong>
