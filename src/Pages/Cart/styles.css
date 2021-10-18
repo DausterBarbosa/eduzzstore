@@ -1,0 +1,85 @@
+#cart .cartpanel{
+    max-width: 1100px;
+    margin: 10px auto;
+    background-color: #FFF;
+    border-radius: 7px;
+    padding: 20px;
+    border: 1px solid #EEE;
+}
+
+#cart .cartpanel table{
+    width: 100%;
+}
+
+#cart .cartpanel table tr td{
+    padding: 10px;
+}
+
+#cart .cartpanel table tr .description {
+    width: 500px;
+}
+
+#cart .cartpanel table tr .description p{
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+#cart .cartpanel table tr .description strong{
+    color: rgb(95, 92, 92);
+}
+
+#cart .cartpanel table tr .quantpanel{
+    display: flex;
+    align-items: center;
+}
+
+#cart .cartpanel table tr .quantpanel input{
+    padding: 7px;
+    border: 2px solid #EEE;
+    outline: none;
+    border-radius: 7px;
+    width: 70px;
+    text-align: center;
+    margin: 0 5px 0 5px;
+}
+
+#cart .cartpanel table tr td img{
+    max-height: 80px;
+}
+
+#cart .cartpanel .footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #EEE;
+    padding-top: 20px;
+}
+
+#cart .cartpanel .footer .footerbutton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background-color: #f30240;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #FFF;
+}
+
+#cart .cartpanel .footer .footerbutton:hover{
+    opacity: 0.8;
+}
+
+#cart .cartpanel .footer .totalprice{
+    display: flex;
+    align-items: baseline;
+}
+
+#cart .cartpanel .footer .totalprice p{
+    margin-right: 10px;
+}
+
+#cart .cartpanel .footer .totalprice strong{
+    font-size: 25px;
+}
