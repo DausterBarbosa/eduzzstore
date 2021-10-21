@@ -71,6 +71,17 @@
     color: #FFF;
 }
 
+#cart .cartpanel .footer .disabledbutton{
+    background-color: #c7c3c3;
+    cursor: not-allowed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 5px;
+    color: #FFF;
+}
+
 #cart .cartpanel .footer .footerbutton:hover{
     opacity: 0.8;
 }
@@ -86,4 +97,18 @@
 
 #cart .cartpanel .footer .totalprice strong{
     font-size: 25px;
+}
+
+#cart .cartpanel .emptycart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+}
+
+#cart .cartpanel .emptycart strong{
+    font-size: 40px;
+    color: #c7c3c3;
+    margin-top: 20px;
 }

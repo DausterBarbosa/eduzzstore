@@ -3,7 +3,8 @@ import {useSelector, useDispatch} from "react-redux";
 
 import {formatPrice} from "../../utils/format";
 
-import {MdDelete} from "react-icons/md";
+import {BsCartXFill} from "react-icons/bs";
+import {MdDelete, MdRemoveShoppingCart} from "react-icons/md";
 import {IoMdRemoveCircleOutline, IoMdAddCircleOutline} from "react-icons/io";
 
 import "./styles.css";
@@ -74,57 +75,68 @@ function Cart(){
     return (
         <div id="cart">
             <div className="cartpanel">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>
+                {
+                    cart.length === 0
+                    ? (
+                        <div className="emptycart">
+                            <BsCartXFill size={120} color="#c7c3c3"/>
+                            <strong>Carrinho vazio</strong>
+                        </div>
+                    )
+                    : (
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>
 
-                            </td>
-                            <td>
-                                <strong>PRODUTO</strong>
-                            </td>
-                            <td>
-                                <strong>QUANTIDADE</strong>
-                            </td>
-                            <td>
-                                <strong>SUBTOTAL</strong>
-                            </td>
-                            <td>
+                                    </td>
+                                    <td>
+                                        <strong>PRODUTO</strong>
+                                    </td>
+                                    <td>
+                                        <strong>QUANTIDADE</strong>
+                                    </td>
+                                    <td>
+                                        <strong>SUBTOTAL</strong>
+                                    </td>
+                                    <td>
 
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        cart.map(product => (
-                            <tr key={product.id}>
-                                <td>
-                                    <img src={product.image} alt={product.description} />
-                                </td>
-                                <td className="description">
-                                    <strong>{product.description}</strong>
-                                    <p>{product.formatted_price}</p>
-                                </td>
-                                <td>
-                                    <div  className="quantpanel">
-                                        <IoMdAddCircleOutline cursor="pointer" size={25} color="#f30240" onClick={() => addToCart(product)}/>
-                                        <input type="text" readOnly value={product.amount}/>
-                                        <IoMdRemoveCircleOutline cursor="pointer" size={25} color="#f30240" onClick={() => removeToCart(product)}/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <strong>{formatPrice(subtotals[product.id])}</strong>
-                                </td>
-                                <td>
-                                    <MdDelete cursor="pointer" size={25} color="#f30240" onClick={() => deleteToCart(product)}/>
-                                </td>
-                            </tr>
-                        ))
-                    }
-                    </tbody>
-                </table>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                cart.map(product => (
+                                    <tr key={product.id}>
+                                        <td>
+                                            <img src={product.image} alt={product.description} />
+                                        </td>
+                                        <td className="description">
+                                            <strong>{product.description}</strong>
+                                            <p>{product.formatted_price}</p>
+                                        </td>
+                                        <td>
+                                            <div  className="quantpanel">
+                                                <IoMdAddCircleOutline cursor="pointer" size={25} color="#f30240" onClick={() => addToCart(product)}/>
+                                                <input type="text" readOnly value={product.amount}/>
+                                                <IoMdRemoveCircleOutline cursor="pointer" size={25} color="#f30240" onClick={() => removeToCart(product)}/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <strong>{formatPrice(subtotals[product.id])}</strong>
+                                        </td>
+                                        <td>
+                                            <MdDelete cursor="pointer" size={25} color="#f30240" onClick={() => deleteToCart(product)}/>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                            </tbody>
+                        </table>
+                    )
+                }
                 <div className="footer">
-                    <div className="footerbutton">
+                    <div className={`${cart.length !== 0 ? "footerbutton" : "disabledbutton"}`}>
                         <strong>FINALIZAR PEDIDO</strong>
                     </div>
 
