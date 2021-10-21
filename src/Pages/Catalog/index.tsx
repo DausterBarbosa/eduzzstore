@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
+
+import {useDispatch, useSelector} from "react-redux";
 
 import Api from "../../services/api";
 
 import {MdOutlineAddShoppingCart} from "react-icons/md";
 
 import "./styles.css";
+import { formatPrice } from "../../utils/format";
 
 interface Product {
     id: number,
@@ -12,31 +15,65 @@ interface Product {
     image: string,
     price: number,
     formatted_price: string,
+    amount: number,
+}
+
+interface StateProps{
+    cart: Product[],
+}
+
+interface ItemAmount {
+    [number:string]: number,
 }
 
 function Catalog(){
     const [products, setProducts] = useState<Product[]>([]);
+    const [amountItems, setAmountItems] = useState<ItemAmount>({});
+
+    const cart = useSelector((state:StateProps) => state.cart);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         Api.get<Product[]>("/products").then(({data}) => {
-            setProducts(data);
+            const newData = data.map(product => ({
+                ...product,
+                formatted_price: formatPrice(product.price)
+            }));
+            setProducts(newData);
         });
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        const amounts = cart.reduce((prev, next) => ({
+            ...prev,
+            [next.id]: next.amount,
+        }), {});
+        
+        setAmountItems(amounts);
+    }, [cart]);
+
+    function addToCart(addedproduct:Product){
+        dispatch({
+            type: "ADD_PRODUCT",
+            payload: addedproduct,
+        });
+    }
 
     return (
         <div id="catalog">
             <ul>
-                {products.map(product => (
+                {products.map((product) => (
                     <li key={product.id}>
                         <img src={product.image} alt={product.description} />
                         <div className="description">
                             <strong>{product.description}</strong>
                             <p>{product.formatted_price}</p>
                         </div>
-                        <div className="addbutton">
+                        <div className="addbutton" onClick={() => addToCart(product)}>
                             <div className="quantinfo">
                                 <MdOutlineAddShoppingCart color="#FFF" size={25}/>
-                                <p>1</p>
+                                <p>{amountItems[product.id] || 0}</p>
                             </div>
                             <strong>ADICIONAR AO CARRINHO</strong>
                         </div>

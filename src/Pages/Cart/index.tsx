@@ -1,52 +1,127 @@
+import {useEffect, useState} from "react";
+import {useSelector, useDispatch} from "react-redux";
+
+import {formatPrice} from "../../utils/format";
+
 import {MdDelete} from "react-icons/md";
 import {IoMdRemoveCircleOutline, IoMdAddCircleOutline} from "react-icons/io";
 
 import "./styles.css";
 
+interface Product {
+    id: number,
+    description: string,
+    image: string,
+    price: number,
+    formatted_price: string,
+    amount: number,
+}
+
+interface StateProps{
+    cart: Product[],
+}
+
+interface SubtotalsProps {
+    [number:string]: number,
+}
+
 function Cart(){
+    const [totalPrice, setTotalPrice] = useState<number>(0);
+    const [subtotals, setSubtotals] = useState<SubtotalsProps>({});
+
+    const cart = useSelector((state:StateProps) => state.cart);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const total = Object.entries(subtotals).reduce((prev, next) => {
+            return prev + next[1];
+        }, 0)
+
+        setTotalPrice(total);
+    }, [subtotals]);
+
+    useEffect(() => {
+        const subtotalsResult = cart.reduce((prev, next) => ({
+            ...prev,
+            [next.id]: next.price * next.amount
+        }), {});
+
+        setSubtotals(subtotalsResult);
+    }, [cart]);
+
+    function addToCart(product:Product){
+        dispatch({
+            type: "ADD_PRODUCT",
+            payload: product
+        });
+    }
+
+    function removeToCart(product:Product){
+        dispatch({
+            type: "REMOVE_PRODUCT",
+            payload: product,
+        });
+    }
+
+    function deleteToCart(product:Product){
+        dispatch({
+            type: "DELETE_PRODUCT",
+            payload: product,
+        });
+    }
+
     return (
         <div id="cart">
             <div className="cartpanel">
                 <table>
-                    <tr>
-                        <td>
+                    <thead>
+                        <tr>
+                            <td>
 
-                        </td>
-                        <td>
-                            <strong>PRODUTO</strong>
-                        </td>
-                        <td>
-                            <strong>QUANTIDADE</strong>
-                        </td>
-                        <td>
-                            <strong>SUBTOTAL</strong>
-                        </td>
-                        <td>
+                            </td>
+                            <td>
+                                <strong>PRODUTO</strong>
+                            </td>
+                            <td>
+                                <strong>QUANTIDADE</strong>
+                            </td>
+                            <td>
+                                <strong>SUBTOTAL</strong>
+                            </td>
+                            <td>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="https://gloimg.gbtcdn.com/soa/gb/item/6575801921400676352/16172/goods_img_big-v17/29f138422045.jpg" alt="" />
-                        </td>
-                        <td className="description">
-                            <strong>erqw oiuwert fkf laksj dlfkajsd flkajsç fkajsçdlkj</strong>
-                            <p>R$ 150,00</p>
-                        </td>
-                        <td>
-                            <div  className="quantpanel">
-                                <IoMdAddCircleOutline cursor="pointer" size={25} color="#f30240"/>
-                                <input type="text" readOnly value="1"/>
-                                <IoMdRemoveCircleOutline cursor="pointer" size={25} color="#f30240"/>
-                            </div>
-                        </td>
-                        <td>
-                            <strong>R$ 500,00</strong>
-                        </td>
-                        <td>
-                            <MdDelete cursor="pointer" size={25} color="#f30240"/>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        cart.map(product => (
+                            <tr key={product.id}>
+                                <td>
+                                    <img src={product.image} alt={product.description} />
+                                </td>
+                                <td className="description">
+                                    <strong>{product.description}</strong>
+                                    <p>{product.formatted_price}</p>
+                                </td>
+                                <td>
+                                    <div  className="quantpanel">
+                                        <IoMdAddCircleOutline cursor="pointer" size={25} color="#f30240" onClick={() => addToCart(product)}/>
+                                        <input type="text" readOnly value={product.amount}/>
+                                        <IoMdRemoveCircleOutline cursor="pointer" size={25} color="#f30240" onClick={() => removeToCart(product)}/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <strong>{formatPrice(subtotals[product.id])}</strong>
+                                </td>
+                                <td>
+                                    <MdDelete cursor="pointer" size={25} color="#f30240" onClick={() => deleteToCart(product)}/>
+                                </td>
+                            </tr>
+                        ))
+                    }
+                    </tbody>
                 </table>
                 <div className="footer">
                     <div className="footerbutton">
@@ -55,7 +130,7 @@ function Cart(){
 
                     <div className="totalprice">
                         <p>TOTAL:</p>
-                        <strong>R$ 500,00</strong>
+                        <strong>{formatPrice(totalPrice)}</strong>
                     </div>
                 </div>
             </div>
