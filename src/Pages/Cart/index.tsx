@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {formatPrice} from "../../utils/format";
 
 import {BsCartXFill} from "react-icons/bs";
-import {MdDelete, MdRemoveShoppingCart} from "react-icons/md";
+import {MdDelete} from "react-icons/md";
 import {IoMdRemoveCircleOutline, IoMdAddCircleOutline} from "react-icons/io";
 
 import "./styles.css";
