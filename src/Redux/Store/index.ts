@@ -1,4 +1,8 @@
-import {createStore, Reducer, Store} from "redux";
+import {createStore, Reducer, Store, applyMiddleware} from "redux";
+
+import createSagaMiddleware from "redux-saga";
+
+import mySaga from "../saga/sagas";
 
 interface Product {
     id: number,
@@ -56,6 +60,10 @@ const Cart:Reducer<StateProps> = (state = INITIAL_STATE, action) => {
     }
 }
 
-const store:Store<StateProps> = createStore(Cart);
+const sagaMiddleware = createSagaMiddleware();
+
+const store:Store<StateProps> = createStore(Cart, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(mySaga);
 
 export default store;

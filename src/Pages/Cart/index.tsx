@@ -53,7 +53,7 @@ function Cart(){
 
     function addToCart(product:Product){
         dispatch({
-            type: "ADD_PRODUCT",
+            type: "CHECK_STOCK",
             payload: product
         });
     }
