@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import Api from "../../services/api";
 
+import {AiOutlineLoading3Quarters} from "react-icons/ai";
 import {MdOutlineAddShoppingCart} from "react-icons/md";
 
 import "./styles.css";
@@ -30,6 +31,8 @@ function Catalog(){
     const [products, setProducts] = useState<Product[]>([]);
     const [amountItems, setAmountItems] = useState<ItemAmount>({});
 
+    const [loading, setLoading] = useState(true);
+
     const cart = useSelector((state:StateProps) => state.cart);
 
     const dispatch = useDispatch();
@@ -41,6 +44,7 @@ function Catalog(){
                 formatted_price: formatPrice(product.price)
             }));
             setProducts(newData);
+            //setLoading(false);
         });
     }, []);
 
@@ -62,24 +66,34 @@ function Catalog(){
 
     return (
         <div id="catalog">
-            <ul>
-                {products.map((product) => (
-                    <li key={product.id}>
-                        <img src={product.image} alt={product.description} />
-                        <div className="description">
-                            <strong>{product.description}</strong>
-                            <p>{product.formatted_price}</p>
-                        </div>
-                        <div className="addbutton" onClick={() => addToCart(product)}>
-                            <div className="quantinfo">
-                                <MdOutlineAddShoppingCart color="#FFF" size={25}/>
-                                <p>{amountItems[product.id] || 0}</p>
-                            </div>
-                            <strong>ADICIONAR AO CARRINHO</strong>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+            {
+                loading
+                ? (
+                    <div className="loading">
+                        <AiOutlineLoading3Quarters size={100} color="#ffcd33" className="rotate"/>
+                    </div>
+                )
+                : (
+                    <ul>
+                        {products.map((product) => (
+                            <li key={product.id}>
+                                <img src={product.image} alt={product.description} />
+                                <div className="description">
+                                    <strong>{product.description}</strong>
+                                    <p>{product.formatted_price}</p>
+                                </div>
+                                <div className="addbutton" onClick={() => addToCart(product)}>
+                                    <div className="quantinfo">
+                                        <MdOutlineAddShoppingCart color="#FFF" size={25}/>
+                                        <p>{amountItems[product.id] || 0}</p>
+                                    </div>
+                                    <strong>ADICIONAR AO CARRINHO</strong>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                )
+            }
         </div>
     );
 }

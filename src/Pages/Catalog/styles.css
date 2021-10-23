@@ -66,3 +66,24 @@
 #catalog ul li .addbutton .quantinfo p{
     margin-left: 5px;
 }
+
+#catalog .loading{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#catalog .loading .rotate{
+    animation: rotation infinite 1s linear;
+}
