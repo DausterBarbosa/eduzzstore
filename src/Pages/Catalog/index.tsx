@@ -44,7 +44,7 @@ function Catalog(){
                 formatted_price: formatPrice(product.price)
             }));
             setProducts(newData);
-            //setLoading(false);
+            setLoading(false);
         });
     }, []);
 
