@@ -4,6 +4,9 @@ EduzzStore é um ecommerce feito em ReactJS, esse projeto também conta com um B
 ## Sobre
 Esse projeto usa gerência de estados por meio do Redux e Redux-Saga e navegação através do react-router-dom.
 
+## Observações
+A cada vez que um produto é adicionado ao carrinho é verificado em tempo real a disponibilidade do produto em estoque, caso tenha a quantidade do produto desejado em estoque o produto é adicionado ao carrinho, caso contrário é notificado ao usuário que a quantidade solicitada está indisponível.
+
 ## Como rodar o projeto
 ```
 # Clone o repositório
