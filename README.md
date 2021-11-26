@@ -1,6 +1,9 @@
 # EduzzStore
 EduzzStore é um ecommerce feito em ReactJS, esse projeto também conta com um BackEnd feito em NodeJS e Banco de Dados MongoDB, pode ser acessado em produção no link: https://eduzzstore.netlify.app/.
 
+## Sobre
+Esse projeto usa gerência de estados por meio do Redux e Redux-Saga e navegação através do React-router-dom.
+
 ## Como rodar o projeto
 ```
 # Clone o repositório
