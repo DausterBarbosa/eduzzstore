@@ -22,3 +22,5 @@ Crie um arquivo <strong>.env</strong> na raiz do projeto, com o conteúdo abaixo
 
 REACT_APP_LINK_API="Aqui vai o link da API"
 ```
+### Backend
+O Backend dessa aplicação pode ser visto no link: https://github.com/DausterBarbosa/eduzzstore-server.
